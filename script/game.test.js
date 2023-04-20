@@ -4,6 +4,8 @@
 
  const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("./game"); //import the game module from game.js
 
+ jest.spyOn(window, "alert").mockImplementation(() => { });
+
  beforeAll(() => { //sets values before the game begins. this means the tests have values to remove to prove functionality.
      let fs = require("fs"); // fs is a built in Node.js module for working with the file system
      let fileContents = fs.readFileSync("index.html", "utf-8"); //The readFileSync method is used to read the contents of the file synchronously and store the result in the fileContents variable.
@@ -11,6 +13,14 @@
      document.write(fileContents);
      document.close();
  });
+
+ describe("pre-game", () => {
+    test("clicking buttons before newGame should fail", () => {
+        game.lastButton = "";
+        document.getElementById("button2").click();
+        expect(game.lastButton).toEqual("");
+    });
+});
  
  describe("game object contains correct keys", () => { //description
      test("score key exists", () => { //test criteria
@@ -31,6 +41,15 @@
      test("turnNumber key exists", () => {
          expect("turnNumber" in game).toBe(true);
      });
+     test("lastButton key exists", () => {
+        expect("lastButton" in game).toBe(true);
+    });
+    test("turnInProgress key exists", () => {
+        expect("turnInProgress" in game).toBe(true);
+    });
+    test("turnInProgress key value is false", () => {
+        expect("turnInProgress" in game).toBe(true);
+    });
  });
  
  describe("newGame works correctly", () => {
@@ -83,9 +102,24 @@
          lightsOn(game.currentGame[0]);
          expect(button.classList).toContain(game.currentGame[0] + "light");
      });
+     test("should toggle turnInProgress to true", () => {
+        showTurns();
+        expect(game.turnInProgress).toBe(true);
+    });
      test("showTurns should update game.turnNumber", () => {
          game.turnNumber = 42;
          showTurns();
          expect(game.turnNumber).toBe(0);
      });
+     test("should increment the score if the turn is correct", () => {
+        game.playerMoves.push(game.currentGame[0]);
+        playerTurn();
+        expect(game.score).toBe(1);
+    });
+    test("clicking during computer sequence should fail", () => {
+        showTurns();
+        game.lastButton = "";
+        document.getElementById("button2").click();
+        expect(game.lastButton).toEqual("");
+    });
  });
