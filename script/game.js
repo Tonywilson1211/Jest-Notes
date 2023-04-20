@@ -43,11 +43,11 @@ function showTurns() {
     }, 800);
 }
 
-function lightsOn(circ) {
-    document.getElementById(circ).classList.add(circ + "light");
+function lightsOn(circ) {//circ because the games has circles
+    document.getElementById(circ).classList.add(circ + "light"); //get element with id passed in
     setTimeout(function () {
         document.getElementById(circ).classList.remove(circ + "light");
-    }, 400);
+    }, 400); //set timer for light in circle
 }
 
 function showScore() {
