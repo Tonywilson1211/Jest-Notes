@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
- const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("../game"); //import the game module from game.js
+ const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("./game"); //import the game module from game.js
 
  beforeAll(() => { //sets values before the game begins. this means the tests have values to remove to prove functionality.
      let fs = require("fs"); // fs is a built in Node.js module for working with the file system

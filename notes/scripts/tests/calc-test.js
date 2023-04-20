@@ -1,6 +1,6 @@
 /**
  * @jest-environment jsdom
- */
+ 
 
 const addition = require("../calc");
 
@@ -42,7 +42,7 @@ describe("Calculator", () => {
       });
     });
   });
-  */ 
+   
 describe("Calculator", () => {
     describe("Subtraction function", () => {
         
@@ -58,3 +58,4 @@ describe("Calculator", () => {
 
     })
 });
+*/

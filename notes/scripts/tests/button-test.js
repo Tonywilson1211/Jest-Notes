@@ -1,6 +1,6 @@
 /**
  * @jest-environment jsdom
- */
+
 
  const buttonClick = require("../button");
 
@@ -22,3 +22,5 @@
          expect(document.getElementsByTagName("h1").length).toBe(1);
      });
  });
+
+ */
